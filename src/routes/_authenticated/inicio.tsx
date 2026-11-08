@@ -32,7 +32,7 @@ function Inicio() {
   const publicos = useQuery({ queryKey: ["treinos", "publicos"], queryFn: buscarTreinosPublicos });
   const meus = useQuery({ queryKey: ["treinos", "participando", user.id], queryFn: () => buscarParticipando(user.id) });
 
-  const primeiroNome = (perfil.data?.nome || (user.user_metadata?.nome as string) || "").split(" ")[0];
+  const primeiroNome = (perfil.data?.nome || (user.user_metadata?.["nome"] as string) || "").split(" ")[0];
   const hoje = hojeISO();
   const confirmados = (meus.data ?? []).filter((t) => t.data >= hoje);
 

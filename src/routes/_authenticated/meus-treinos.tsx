@@ -29,7 +29,7 @@ function MeusTreinos() {
   );
 }
 
-function Secao({ titulo, q, vazio }: { titulo: string; q: { data?: TreinoComContagem[]; isLoading: boolean; error: unknown; refetch: () => unknown }; vazio: string }) {
+function Secao({ titulo, q, vazio }: { titulo: string; q: { data?: TreinoComContagem[] | undefined; isLoading: boolean; error: unknown; refetch: () => unknown }; vazio: string }) {
   return (
     <section>
       <h2 className="mb-3 text-lg font-bold">{titulo}</h2>

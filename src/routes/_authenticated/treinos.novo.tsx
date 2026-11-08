@@ -71,7 +71,7 @@ function NovoTreino() {
       .insert({
         nome: v.nome,
         modalidade: v.modalidade,
-        modalidade_outro: v.modalidade === "Outro" ? v.modalidade_outro : null,
+        modalidade_outro: v.modalidade === "Outro" ? (v.modalidade_outro ?? null) : null,
         data: v.data,
         horario: v.horario,
         local: v.local,

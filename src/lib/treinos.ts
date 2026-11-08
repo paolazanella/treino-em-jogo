@@ -43,7 +43,7 @@ export function nomeModalidade(t: Pick<Treino, "modalidade" | "modalidade_outro"
 }
 
 export function formatarData(data: string) {
-  const [y, m, d] = data.split("-").map(Number);
+  const [y = 1970, m = 1, d = 1] = data.split("-").map(Number);
   return new Date(y, m - 1, d).toLocaleDateString("pt-BR", {
     weekday: "short",
     day: "2-digit",
