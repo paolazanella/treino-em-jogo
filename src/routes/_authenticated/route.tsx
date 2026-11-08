@@ -19,12 +19,13 @@ export const Route = createFileRoute("/_authenticated")({
   component: AppLayout,
 });
 
-const NAV = [
+type NavItem = { to: "/inicio" | "/meus-treinos" | "/treinos/novo" | "/perfil"; label: string; icon: typeof Home; destaque?: boolean };
+const NAV: NavItem[] = [
   { to: "/inicio", label: "Início", icon: Home },
   { to: "/meus-treinos", label: "Meus treinos", icon: ListChecks },
   { to: "/treinos/novo", label: "Criar", icon: Plus, destaque: true },
   { to: "/perfil", label: "Perfil", icon: User },
-] as const;
+];
 
 function AppLayout() {
   const path = useRouterState({ select: (s) => s.location.pathname });

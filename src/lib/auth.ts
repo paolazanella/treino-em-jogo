@@ -37,8 +37,8 @@ export async function garantirPerfil(dados?: { nome?: string; data_nascimento?: 
   const user = u.user;
   if (!user) return;
   const meta = (user.user_metadata ?? {}) as Record<string, string>;
-  const nome = dados?.nome ?? meta.nome ?? "";
-  const nasc = dados?.data_nascimento ?? meta.data_nascimento ?? null;
+  const nome = dados?.nome ?? meta["nome"] ?? "";
+  const nasc = dados?.data_nascimento ?? meta["data_nascimento"] ?? null;
   const { data: atual } = await supabase.from("profiles").select("id,nome,data_nascimento").eq("id", user.id).maybeSingle();
   if (atual && atual.nome && atual.data_nascimento) return;
   const { error } = await supabase.from("profiles").upsert({
