@@ -14,13 +14,169 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      participacoes: {
+        Row: {
+          created_at: string
+          id: string
+          treino_id: string
+          usuario_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          treino_id: string
+          usuario_id?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          treino_id?: string
+          usuario_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "participacoes_treino_id_fkey"
+            columns: ["treino_id"]
+            isOneToOne: false
+            referencedRelation: "treinos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          data_nascimento: string | null
+          email: string | null
+          id: string
+          nome: string
+        }
+        Insert: {
+          created_at?: string
+          data_nascimento?: string | null
+          email?: string | null
+          id: string
+          nome?: string
+        }
+        Update: {
+          created_at?: string
+          data_nascimento?: string | null
+          email?: string | null
+          id?: string
+          nome?: string
+        }
+        Relationships: []
+      }
+      treino_acessos: {
+        Row: {
+          created_at: string
+          treino_id: string
+          usuario_id: string
+        }
+        Insert: {
+          created_at?: string
+          treino_id: string
+          usuario_id: string
+        }
+        Update: {
+          created_at?: string
+          treino_id?: string
+          usuario_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "treino_acessos_treino_id_fkey"
+            columns: ["treino_id"]
+            isOneToOne: false
+            referencedRelation: "treinos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      treino_codigos: {
+        Row: {
+          codigo_acesso: string
+          treino_id: string
+        }
+        Insert: {
+          codigo_acesso: string
+          treino_id: string
+        }
+        Update: {
+          codigo_acesso?: string
+          treino_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "treino_codigos_treino_id_fkey"
+            columns: ["treino_id"]
+            isOneToOne: true
+            referencedRelation: "treinos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      treinos: {
+        Row: {
+          created_at: string
+          data: string
+          descricao: string | null
+          horario: string
+          id: string
+          limite_participantes: number
+          local: string
+          modalidade: string
+          modalidade_outro: string | null
+          nome: string
+          organizador_id: string
+          visibilidade: string
+        }
+        Insert: {
+          created_at?: string
+          data: string
+          descricao?: string | null
+          horario: string
+          id?: string
+          limite_participantes: number
+          local: string
+          modalidade: string
+          modalidade_outro?: string | null
+          nome: string
+          organizador_id?: string
+          visibilidade?: string
+        }
+        Update: {
+          created_at?: string
+          data?: string
+          descricao?: string | null
+          horario?: string
+          id?: string
+          limite_participantes?: number
+          local?: string
+          modalidade?: string
+          modalidade_outro?: string | null
+          nome?: string
+          organizador_id?: string
+          visibilidade?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      entrar_com_codigo: { Args: { _codigo: string }; Returns: string }
+      nome_organizador: { Args: { _treino_id: string }; Returns: string }
+      participantes_do_treino: {
+        Args: { _treino_id: string }
+        Returns: {
+          created_at: string
+          nome: string
+          usuario_id: string
+        }[]
+      }
+      pode_ver_treino: { Args: { _treino_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
